@@ -1,0 +1,12 @@
+{
+    "name": "t-axed-standalone",
+    "private": true,
+    "scripts": {
+        "dev": "pnpm --filter @antigravity/t-axed dev",
+        "build": "pnpm --filter @antigravity/t-axed build",
+        "start": "pnpm --filter @antigravity/t-axed preview"
+    },
+    "devDependencies": {
+        "turbo": "latest"
+    }
+}

@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0F2940;
+  --color-primary-light: #1E4A6D;
+  --color-accent: #D45D4C;
+  --color-accent-light: #E8887B;
+  
+  --color-background: #FAFAF8;
+  --color-foreground: #0F2940;
+  
+  --color-muted: #F5F3F0;
+  --color-muted-foreground: #5C6B7A;
+
+  --radius-warm: 2rem;
+  
+  --animate-warm-in: warm-in 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes warm-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

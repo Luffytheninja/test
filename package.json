@@ -1,12 +1,21 @@
 {
     "name": "t-axed-standalone",
     "private": true,
+    "packageManager": "pnpm@9.0.0",
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
     "scripts": {
         "dev": "pnpm --filter @antigravity/t-axed dev",
         "build": "pnpm --filter @antigravity/t-axed build",
         "start": "pnpm --filter @antigravity/t-axed preview"
     },
     "devDependencies": {
-        "turbo": "latest"
+        "turbo": "latest",
+        "typescript": "^5.9.3"
     }
 }

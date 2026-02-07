@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "pnpm exec tsc && vite build",
     "preview": "vite preview"
   },
   "keywords": [],

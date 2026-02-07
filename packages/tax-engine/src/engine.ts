@@ -63,13 +63,16 @@ export function calculateTax(inputs: TaxInputs): TaxResults {
     const taxFreeAllowance = TAX_CONSTANTS.TAX_FREE_ALLOWANCE;
     const chargeableIncome = isSmallBusinessExempt ? 0 : Math.max(0, netIncome - taxFreeAllowance);
 
-    // Progressive Staircase Calculation
+    // 2025 Nigerian Tax Act (NTA) Progressive Bands
+    // Base is first 800k @ 0% (handled by chargeableIncome deduction)
     const TAX_BANDS_CONFIG = [
-        { threshold: 1000000, rate: 0.15 },
-        { threshold: 2000000, rate: 0.18 },
-        { threshold: 5000000, rate: 0.21 },
-        { threshold: Infinity, rate: 0.25 },
+        { threshold: 2200000, rate: 0.15 },  // Next 2.2M (Up to 3M total)
+        { threshold: 11200000, rate: 0.18 }, // Next 9M (Up to 12M total)
+        { threshold: 24200000, rate: 0.21 }, // Next 13M (Up to 25M total)
+        { threshold: 49200000, rate: 0.23 }, // Next 25M (Up to 50M total)
+        { threshold: Infinity, rate: 0.25 }, // Above 50M total
     ];
+
 
     let remainingChargeable = chargeableIncome;
     let prevThreshold = 0;

@@ -64,15 +64,22 @@ export const TaxProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setUserCategory(loadUserCategory());
     }, []);
 
-    // Save on change
+    const results = useMemo(() => calculateTax({ ...inputs, category: userCategory as any }), [inputs, userCategory]);
+
+    // Save and Sync
     useEffect(() => {
         saveUserData(inputs);
         saveIncomeEntries(inputs.incomeEntries);
         saveExpenseEntries(inputs.expenseEntries);
         saveUserCategory(userCategory as any);
-    }, [inputs, userCategory]);
 
-    const results = useMemo(() => calculateTax({ ...inputs, category: userCategory as any }), [inputs, userCategory]);
+        // Background sync to Supabase (Data Collection Phase)
+        if (results) {
+            import('../services/SupabaseService').then(({ syncTaxData }) => {
+                syncTaxData(null, inputs, results, userCategory); // Anonymous sync for now
+            });
+        }
+    }, [inputs, userCategory, results]);
 
     const updateInputs = (updates: Partial<TaxInputs>) => {
         setInputs((prev: TaxInputs) => ({ ...prev, ...updates }));
